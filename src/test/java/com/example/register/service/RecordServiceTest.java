@@ -8,6 +8,7 @@ import com.example.register.model.Record;
 import com.example.register.model.repo.RecordRepository;
 import com.example.register.service.impl.RecordServiceImpl;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,8 +85,9 @@ public class RecordServiceTest {
     })
     public void getRecords(Long idNumber, String status) {
         Record record = createRecord();
+        List<Record> recordList = Collections.singletonList(record);
 
-        when(recordRepository.findAll(any(Specification.class))).thenReturn(List.of(record));
+        when(recordRepository.findAll(any(Specification.class))).thenReturn(recordList);
 
         assertEquals(25L,
                 recordService.getRecords(idNumber, status, Pageable.unpaged()).getContent().get(0).getTotalFaceValue());
@@ -107,13 +109,13 @@ public class RecordServiceTest {
 
     static Stream<Arguments> fieldsArg() {
         return Stream.of(
-                Arguments.of(new HashMap<>() {{
+                Arguments.of(new HashMap<String, Long>() {{
                     put("amount", 10L);
                 }}, 10L, 50L, "Good job"),
-                Arguments.of(new HashMap<>() {{
+                Arguments.of(new HashMap<String, Long>() {{
                     put("faceValue", 20L);
                 }}, 5L, 100L, "Good job"),
-                Arguments.of(new HashMap<>() {{
+                Arguments.of(new HashMap<String, String>() {{
                     put("comment", "Comment");
                 }}, 5L, 25L, "Comment")
         );

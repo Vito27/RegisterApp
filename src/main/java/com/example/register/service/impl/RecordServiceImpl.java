@@ -88,6 +88,7 @@ public class RecordServiceImpl implements RecordService {
 
     private Page<Record> findAllByIdNumberOrStatus(Long idNumber, String status) {
         List<Record> recordsList = recordRepository.findAll((Specification<Record>) (r, cq, cb) -> {
+            Predicate[] predicatesArr;
             Path<Integer> idn = r.get("idNumber");
             Path<String> sn = r.get("status");
             List<Predicate> predicates = new ArrayList<>();
@@ -97,7 +98,8 @@ public class RecordServiceImpl implements RecordService {
             if (status != null) {
                 predicates.add(cb.equal(sn, status));
             }
-            return cb.and(predicates.toArray(Predicate[]::new));
+            predicatesArr = new Predicate[predicates.size()];
+            return cb.and(predicates.toArray(predicatesArr));
         });
         return new PageImpl<>(recordsList);
     }

@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import com.example.register.model.ChangeHistory;
 import com.example.register.model.repo.ChangeHistoryRepository;
 import com.example.register.service.impl.ChangeHistoryServiceImpl;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class ChangeHistoryServiceTest {
     @Test
     void saveAll() {
         ChangeHistory changeHistory = createChangeHistory();
-        List<ChangeHistory> changeHistories = List.of(changeHistory);
+        List<ChangeHistory> changeHistories = Collections.singletonList(changeHistory);
 
         changeHistoryService.saveAll(changeHistories);
         verify(changeHistoryRepository, times(1)).saveAll(changeHistories);
