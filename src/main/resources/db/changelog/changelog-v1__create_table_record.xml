@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet author="vito" id="1">
+    <sql dbms="postgresql" endDelimiter=";">
+      CREATE SCHEMA register
+    </sql>
+    <createSequence sequenceName="record_record_id_seq" startValue="1"/>
+    <createTable schemaName="register" tableName="record">
+      <column name="record_id" type="BIGINT" valueSequenceNext="record_record_id_seq">
+        <constraints primaryKeyName="PK__record__record_id" nullable="false"/>
+      </column>
+      <column name="id_number" type="BIGINT">
+        <constraints unique="true"/>
+      </column>
+      <column name="comment" type="VARCHAR(255)"/>
+      <column name="amount" type="BIGINT"/>
+      <column name="face_value" type="BIGINT"/>
+      <column name="total_face_value" type="BIGINT"/>
+      <column name="release_date" type="DATE"/>
+      <column name="status" type="VARCHAR(20)"/>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

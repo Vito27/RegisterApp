@@ -44,7 +44,6 @@ public class RegisterApplication implements ApplicationRunner {
             record.setIdNumber((Long) jsonValue.get("idNumber"));
             record.setStatus((String) jsonValue.get("status"));
             record.setComment((String) jsonValue.get("comment"));
-            System.out.println(record);
             recordList.add(record);
         }
         recordRepository.saveAll(recordList);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet author="vito" id="2">
+    <createSequence sequenceName="change_history_change_history_id_seq" startValue="1"/>
+    <createTable schemaName="register" tableName="change_history">
+      <column name="change_history_id" type="BIGINT" valueSequenceNext="change_history_change_history_id_seq">
+        <constraints primaryKeyName="PK__change_history__change_history_id" nullable="false"/>
+      </column>
+      <column name="id_number" type="BIGINT"/>
+      <column name="field_name" type="VARCHAR(50)"/>
+      <column name="old_value" type="VARCHAR(255)"/>
+      <column name="new_value" type="VARCHAR(255)"/>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>
